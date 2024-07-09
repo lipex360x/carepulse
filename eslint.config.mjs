@@ -6,6 +6,8 @@ import { fixupConfigRules } from '@eslint/compat'
 import prettierPlugin from 'eslint-plugin-prettier/recommended'
 
 export default [
+  { ignores: ['.next/**/*'] },
+  { settings: { react: { version: 'detect' } } },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } } },
   { languageOptions: { globals: globals.browser } },
@@ -16,6 +18,7 @@ export default [
   {
     rules: {
       'react/react-in-jsx-scope': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 ]
