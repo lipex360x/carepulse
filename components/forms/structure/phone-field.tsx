@@ -1,12 +1,11 @@
-import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { FormControl } from '@/components/ui/form'
-import { InputFormProps } from '../interfaces'
 import { E164Number } from 'libphonenumber-js/core'
+import { FieldPropsType } from './field-type'
 
-export const PhoneField = (inputProps: InputFormProps) => {
-  const { field } = inputProps
+import 'react-phone-number-input/style.css'
 
+export const PhoneField = ({ field }: FieldPropsType) => {
   return (
     <FormControl>
       <PhoneInput

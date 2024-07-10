@@ -1,31 +1,30 @@
 'use client'
 
 import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { FormFieldType } from '../constant'
-import { InputFormProps, InputPropsType } from '../interfaces'
 import { InputField } from './input-field'
 import { PhoneField } from './phone-field'
 import { DatePickerField } from './date-picker-field'
 import { SelectField } from './select-field'
 import { TextAreaField } from './textarea-field'
 import { CheckboxField } from './checkbox-field'
+import { FieldPropsType, FormFieldType, InputPropsType } from './field-type'
 
-const RenderField = (inputProps: InputFormProps) => {
-  const field = inputProps.props.fieldType
-  if (field === FormFieldType.INPUT) return <InputField {...inputProps} />
-  if (field === FormFieldType.TEXTAREA) return <TextAreaField {...inputProps} />
-  if (field === FormFieldType.PHONE_INPUT) return <PhoneField {...inputProps} />
-  if (field === FormFieldType.DATE_PICKER) return <DatePickerField {...inputProps} />
-  if (field === FormFieldType.CHECKBOX) return <CheckboxField {...inputProps} />
-  if (field === FormFieldType.SELECT) return <SelectField {...inputProps} />
-  if (field === FormFieldType.SKELETON) {
-    const { renderSkeleton } = inputProps.props
-    return renderSkeleton ? renderSkeleton(inputProps.field) : null
+const RenderField = (fieldProps: FieldPropsType) => {
+  const { fieldType } = fieldProps.props
+  if (fieldType === FormFieldType.INPUT) return <InputField {...fieldProps} />
+  if (fieldType === FormFieldType.TEXTAREA) return <TextAreaField {...fieldProps} />
+  if (fieldType === FormFieldType.PHONE_INPUT) return <PhoneField {...fieldProps} />
+  if (fieldType === FormFieldType.DATE_PICKER) return <DatePickerField {...fieldProps} />
+  if (fieldType === FormFieldType.CHECKBOX) return <CheckboxField {...fieldProps} />
+  if (fieldType === FormFieldType.SELECT) return <SelectField {...fieldProps} />
+  if (fieldType === FormFieldType.SKELETON) {
+    const { renderSkeleton } = fieldProps.props
+    return renderSkeleton ? renderSkeleton(fieldProps.field) : null
   }
 }
 
-export const CustomFormField = (props: InputPropsType) => {
-  const { control, fieldType, name, label } = props
+export const CustomFormField = (inputProps: InputPropsType) => {
+  const { control, fieldType, name, label } = inputProps
 
   return (
     <FormField
@@ -34,9 +33,7 @@ export const CustomFormField = (props: InputPropsType) => {
       render={({ field }) => (
         <FormItem className="flex-1">
           {fieldType !== FormFieldType.CHECKBOX && label && <FormLabel>{label}</FormLabel>}
-
-          <RenderField field={field} props={props} />
-
+          <RenderField field={field} props={inputProps} />
           <FormMessage className='"shad-error' />
         </FormItem>
       )}

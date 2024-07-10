@@ -1,15 +1,15 @@
 import { FormControl } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
-import { InputFormProps } from '../interfaces'
+import { FieldPropsType } from './field-type'
 
-export const TextAreaField = (inputProps: InputFormProps) => {
+export const TextAreaField = ({ field, props }: FieldPropsType) => {
   return (
     <FormControl>
       <Textarea
-        placeholder={inputProps.props.placeholder}
-        {...inputProps.field}
+        placeholder={props.placeholder}
         className="shad-textarea"
-        disabled={inputProps.props.disabled}
+        disabled={props.disabled}
+        {...field}
       ></Textarea>
     </FormControl>
   )

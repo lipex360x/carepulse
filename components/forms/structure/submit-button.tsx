@@ -1,6 +1,12 @@
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
+type ButtonProps = {
+  isLoading: boolean
+  className?: string
+  children: React.ReactNode
+}
+
 export const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
   return (
     <Button type="submit" disabled={isLoading} className={className ?? 'shad-primary-btn w-full'}>
@@ -14,10 +20,4 @@ export const SubmitButton = ({ isLoading, className, children }: ButtonProps) =>
       )}
     </Button>
   )
-}
-
-type ButtonProps = {
-  isLoading: boolean
-  className?: string
-  children: React.ReactNode
 }

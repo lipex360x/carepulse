@@ -3,19 +3,19 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form'
-import { CustomFormField, SubmitButton } from './structure'
-import { FormFieldType } from './constant/form-field-type'
+import { CustomFormField, SubmitButton } from '../structure'
 import { useState } from 'react'
-import { UserFormProps, userFormSchema } from './validations'
 import { useRouter } from 'next/navigation'
 import { createUser } from '@/actions/patient/create-user'
+import { PatientFormProps, patientFormSchema } from './form-validation'
+import { FormFieldType } from '../structure/field-type'
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  const form = useForm<UserFormProps>({
-    resolver: zodResolver(userFormSchema),
+  const form = useForm<PatientFormProps>({
+    resolver: zodResolver(patientFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -23,7 +23,7 @@ const PatientForm = () => {
     },
   })
 
-  async function onSubmit(userData: UserFormProps) {
+  async function onSubmit(userData: PatientFormProps) {
     setIsLoading(true)
     try {
       const user = await createUser(userData)

@@ -3,25 +3,25 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Form, FormControl } from '@/components/ui/form'
-import { CustomFormField, SubmitButton } from './structure'
-import { FormFieldType } from './constant/form-field-type'
+import { CustomFormField, SubmitButton } from '../structure'
 import { useState } from 'react'
-import { UserFormProps, userFormSchema } from './validations'
 import { useRouter } from 'next/navigation'
 import { createUser } from '@/actions/patient/create-user'
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
+import { RadioGroup, RadioGroupItem } from '../../ui/radio-group'
 import { Doctors, GenderOptions, IdentificationTypes } from './constant'
-import { Label } from '../ui/label'
-import { SelectItem } from '../ui/select'
+import { Label } from '../../ui/label'
+import { SelectItem } from '../../ui/select'
 import Image from 'next/image'
-import { FileUploader } from '../ui/file-uploader'
+import { FileUploader } from '../../ui/file-uploader'
+import { PatientFormProps, patientFormSchema } from './form-validation'
+import { FormFieldType } from '../structure/field-type'
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  const form = useForm<UserFormProps>({
-    resolver: zodResolver(userFormSchema),
+  const form = useForm<PatientFormProps>({
+    resolver: zodResolver(patientFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -29,7 +29,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
     },
   })
 
-  async function onSubmit(userData: UserFormProps) {
+  async function onSubmit(userData: PatientFormProps) {
     setIsLoading(true)
     try {
       const user = await createUser(userData)

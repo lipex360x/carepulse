@@ -1,5 +1,14 @@
-import { Control } from 'react-hook-form'
-import { FormFieldType } from '../constant'
+import { Control, ControllerRenderProps } from 'react-hook-form'
+
+export enum FormFieldType {
+  INPUT = 'input',
+  TEXTAREA = 'textarea',
+  PHONE_INPUT = 'phoneInput',
+  CHECKBOX = 'checkBox',
+  DATE_PICKER = 'datePicker',
+  SELECT = 'select',
+  SKELETON = 'skeleton',
+}
 
 export type InputPropsType = {
   control: Control<any>
@@ -16,7 +25,7 @@ export type InputPropsType = {
   renderSkeleton?: (field: any) => React.ReactNode
 }
 
-export type InputFormProps = {
-  field: any
+export type FieldPropsType = {
+  field: ControllerRenderProps
   props: InputPropsType
 }

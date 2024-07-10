@@ -1,12 +1,9 @@
 import Image from 'next/image'
-import { InputFormProps } from '../interfaces'
 import { FormControl } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { FieldPropsType } from './field-type'
 
-export const InputField = (inputProps: InputFormProps) => {
-  const { field, props } = inputProps
-  // console.log(field)
-
+export const InputField = ({ field, props }: FieldPropsType) => {
   return (
     <div className="flex rounded-md border border-dark-500 bg-dark-400">
       {props.iconSrc && (
