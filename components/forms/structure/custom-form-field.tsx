@@ -12,6 +12,10 @@ const RenderField = (inputProps: InputFormProps) => {
   if (field === FormFieldType.INPUT) return <InputField {...inputProps} />
   if (field === FormFieldType.PHONE_INPUT) return <PhoneField {...inputProps} />
   if (field === FormFieldType.DATE_PICKER) return <DatePickerField {...inputProps} />
+  if (field === FormFieldType.SKELETON) {
+    const { renderSkeleton } = inputProps.props
+    return renderSkeleton ? renderSkeleton(inputProps.field) : null
+  }
 }
 
 export const CustomFormField = (props: InputPropsType) => {
