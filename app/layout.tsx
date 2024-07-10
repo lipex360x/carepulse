@@ -3,7 +3,7 @@ import { Plus_Jakarta_Sans as FontSans } from 'next/font/google'
 import './globals.css'
 
 import { cn } from '@/lib/utils'
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '@/components/providers/theme-provider'
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={cn('min-h-screen bg-dark-300 font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           {children}
