@@ -1,11 +1,21 @@
-import { appwriteConfig, databases } from '@/lib/appwrite/config'
+import { appwriteConfig, databases } from '@/lib/appwrite'
+import { Permission, Role } from 'node-appwrite'
 
 const { databaseId } = appwriteConfig
+
+const permissions = [
+  Permission.create(Role.any()),
+  Permission.read(Role.any()),
+  Permission.update(Role.any()),
+  Permission.delete(Role.any()),
+]
 
 await databases.delete(databaseId)
 await databases.create(databaseId, 'carepulse_db')
 
-await databases.createCollection(databaseId, 'patient_collection', 'patient')
+await databases.createCollection(databaseId, 'patient_collection', 'patient', permissions)
+await databases.createCollection(databaseId, 'doctor_collection', 'doctor', permissions)
+await databases.createCollection(databaseId, 'appointment_collection', 'appointment', permissions)
 
 await databases.createStringAttribute(databaseId, 'patient_collection', 'userId', 100, true)
 await databases.createStringAttribute(databaseId, 'patient_collection', 'name', 100, true)

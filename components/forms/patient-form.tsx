@@ -7,11 +7,12 @@ import { CustomFormField, SubmitButton } from './structure'
 import { FormFieldType } from './constant/form-field-type'
 import { useState } from 'react'
 import { UserFormProps, userFormSchema } from './validations'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+import { createUser } from '@/actions/patient.action'
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false)
-  // const router = useRouter()
+  const router = useRouter()
 
   const form = useForm<UserFormProps>({
     resolver: zodResolver(userFormSchema),
@@ -25,12 +26,12 @@ const PatientForm = () => {
   async function onSubmit(userData: UserFormProps) {
     setIsLoading(true)
     try {
-      // const user = await createUser(userData)
-      // if (user) router.push(`/patient/${user.$id}/register`)
-      console.log(userData)
+      const user = await createUser(userData)
+      if (user) router.push(`/patient/${user.$id}/register`)
     } catch (error) {
       console.log(error)
     }
+    setIsLoading(false)
   }
 
   return (
