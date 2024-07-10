@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --fix",
-    "db:migrate": "bun ./database/create-db.ts"
+    "db:migrate": "bun ./database/migration.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
