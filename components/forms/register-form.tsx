@@ -10,8 +10,10 @@ import { UserFormProps, userFormSchema } from './validations'
 import { useRouter } from 'next/navigation'
 import { createUser } from '@/actions/patient/create-user'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
-import { GenderOptions } from './constant'
+import { Doctors, GenderOptions } from './constant'
 import { Label } from '../ui/label'
+import { SelectItem } from '../ui/select'
+import Image from 'next/image'
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -161,6 +163,31 @@ export const RegisterForm = ({ user }: { user: User }) => {
           </div>
         </section>
 
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="primary_physician"
+          label="Primary Physician"
+          placeholder="Select a Physician"
+        >
+          {Doctors.map((doctor) => (
+            <SelectItem key={doctor.name} value={doctor.name}>
+              <div className="flex cursor-pointer items-center gap-2">
+                <Image
+                  src={doctor.image}
+                  width={32}
+                  height={32}
+                  alt={doctor.name}
+                  className="rounded-full border border-dark-500"
+                />
+                <p>{doctor.name}</p>
+              </div>
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
+        <div className="flex flex-col gap-6 xl:flex-row"></div>
+        <div className="flex flex-col gap-6 xl:flex-row"></div>
         <div className="flex flex-col gap-6 xl:flex-row"></div>
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
