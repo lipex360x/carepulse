@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 
 export const InputField = (inputProps: InputFormProps) => {
   const { field, props } = inputProps
+  console.log(field)
 
   return (
     <div className="flex rounded-md border border-dark-500 bg-dark-400">

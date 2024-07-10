@@ -17,13 +17,12 @@ const RenderField = (inputProps: InputFormProps) => {
       return <InputField {...inputProps} />
     case FormFieldType.PHONE_INPUT:
       return <PhoneField {...inputProps} />
-    default:
-      break
   }
 }
 
 export const CustomFormField = (props: InputPropsType) => {
   const { control, fieldType, name, label } = props
+  console.log(name)
   return (
     <FormField
       control={control}

@@ -2,26 +2,19 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import { Form } from '@/components/ui/form'
 import { CustomFormField, SubmitButton } from './structure'
 import { FormFieldType } from './constant/form-field-type'
 import { useState } from 'react'
-import { UserFormProps } from './validations'
-import { useRouter } from 'next/navigation'
-
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
-  }),
-})
+import { UserFormProps, userFormSchema } from './validations'
+// import { useRouter } from 'next/navigation'
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  // const router = useRouter()
 
   const form = useForm<UserFormProps>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(userFormSchema),
     defaultValues: {
       name: '',
       email: '',
@@ -50,7 +43,7 @@ const PatientForm = () => {
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
-          name="user"
+          name="name"
           label="Full Name"
           placeholder="John doe"
           control={form.control}
