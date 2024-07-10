@@ -281,10 +281,37 @@ export const RegisterForm = ({ user }: { user: User }) => {
           )}
         />
 
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
-        <div className="flex flex-col gap-6 xl:flex-row"></div>
+        <section className="space-y-4">
+          <div className="mb-9 space-y-1">
+            <h2 className="sub-header">Consent and Privacy</h2>
+          </div>
+        </section>
 
-        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="treatment_concent"
+          label="I consent to treatment"
+          placeholder="AB12345CD"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="disclosure_concent"
+          label="I consent to disclosure of information"
+          placeholder="AB12345CD"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.CHECKBOX}
+          control={form.control}
+          name="privacy_concent"
+          label="I consent to privacy policy"
+          placeholder="AB12345CD"
+        />
+
+        <SubmitButton isLoading={isLoading}>Submit and continue</SubmitButton>
       </form>
     </Form>
   )
