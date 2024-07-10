@@ -7,10 +7,12 @@ import { InputField } from './input-field'
 import { PhoneField } from './phone-field'
 import { DatePickerField } from './date-picker-field'
 import { SelectField } from './select-field'
+import { TextAreaField } from './textarea-field'
 
 const RenderField = (inputProps: InputFormProps) => {
   const field = inputProps.props.fieldType
   if (field === FormFieldType.INPUT) return <InputField {...inputProps} />
+  if (field === FormFieldType.TEXTAREA) return <TextAreaField {...inputProps} />
   if (field === FormFieldType.PHONE_INPUT) return <PhoneField {...inputProps} />
   if (field === FormFieldType.DATE_PICKER) return <DatePickerField {...inputProps} />
   if (field === FormFieldType.SELECT) return <SelectField {...inputProps} />
