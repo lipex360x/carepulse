@@ -13,19 +13,21 @@ import { Label } from '../../ui/label'
 import { SelectItem } from '../../ui/select'
 import Image from 'next/image'
 import { FileUploader } from '../../ui/file-uploader'
-import { PatientFormProps, patientFormSchema } from './form-validation'
+import { PatientFormProps, PatientFormValidation } from './form-validation'
 import { FormFieldType } from '../structure/field-type'
+import { PatientFormDefaultValues } from './form-default-values'
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
   const form = useForm<PatientFormProps>({
-    resolver: zodResolver(patientFormSchema),
+    resolver: zodResolver(PatientFormValidation),
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
+      ...PatientFormDefaultValues,
+      name: user.name,
+      email: user.email,
+      phone: user.phone,
     },
   })
 
@@ -89,7 +91,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.DATE_PICKER}
             control={form.control}
-            name="birth_date"
+            name="birthDate"
             label="Date of Birth"
             placeholder="john@mail.com"
             iconSrc="/assets/icons/email.svg"
@@ -144,7 +146,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="emergency_contact_name"
+            name="emergencyContactName"
             label="Emergency Contact Name"
             placeholder="Guardian's name"
           />
@@ -152,7 +154,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.PHONE_INPUT}
             control={form.control}
-            name="emergency_contact_number"
+            name="emergencyContactNumber"
             label="Emergency Contact Number"
             placeholder="(555) 123-4567"
           />
@@ -167,7 +169,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.SELECT}
           control={form.control}
-          name="primary_physician"
+          name="primaryPhysician"
           label="Primary Physician"
           placeholder="Select a Physician"
         >
@@ -191,7 +193,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="insurance_provider"
+            name="insuranceProvider"
             label="Insurance Provider"
             placeholder="BlueCross BlueShield"
           />
@@ -199,7 +201,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="insurance_policy_number"
+            name="insurancePolicyNumber"
             label="Insurance Policy Number"
             placeholder="ABC123D456E8"
           />
@@ -217,7 +219,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.TEXTAREA}
             control={form.control}
-            name="current_medication"
+            name="currentMedication"
             label="Current Medication (if any)"
             placeholder="Ibuprofen 200mg, Paracetamol 500mg"
           />
@@ -227,7 +229,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.TEXTAREA}
             control={form.control}
-            name="family_medical_history"
+            name="familyMedicalHistory"
             label="Family Medical History"
             placeholder="Mother had brain problem..."
           />
@@ -235,7 +237,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
           <CustomFormField
             fieldType={FormFieldType.TEXTAREA}
             control={form.control}
-            name="past_medical_history"
+            name="pastMedicalHistory"
             label="Past Medical History"
             placeholder="Appendectomy..."
           />
@@ -250,7 +252,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.SELECT}
           control={form.control}
-          name="identification_type"
+          name="identificationType"
           label="Identification Type"
           placeholder="Select an identification type"
         >
@@ -264,7 +266,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.INPUT}
           control={form.control}
-          name="identification_number"
+          name="identificationNumber"
           label="Identification Number"
           placeholder="AB12345CD"
         />
@@ -272,7 +274,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.SKELETON}
           control={form.control}
-          name="identification_document"
+          name="identificationDocument"
           label="Scanned copy of Identification Document"
           renderSkeleton={(field) => (
             <FormControl>
@@ -290,7 +292,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.CHECKBOX}
           control={form.control}
-          name="treatment_concent"
+          name="treatmentConsent"
           label="I consent to treatment"
           placeholder="AB12345CD"
         />
@@ -298,7 +300,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.CHECKBOX}
           control={form.control}
-          name="disclosure_concent"
+          name="disclosureConsent"
           label="I consent to disclosure of information"
           placeholder="AB12345CD"
         />
@@ -306,7 +308,7 @@ export const RegisterForm = ({ user }: { user: User }) => {
         <CustomFormField
           fieldType={FormFieldType.CHECKBOX}
           control={form.control}
-          name="privacy_concent"
+          name="privacyConsent"
           label="I consent to privacy policy"
           placeholder="AB12345CD"
         />

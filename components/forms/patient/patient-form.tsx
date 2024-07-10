@@ -7,15 +7,15 @@ import { CustomFormField, SubmitButton } from '../structure'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createUser } from '@/actions/patient/create-user'
-import { PatientFormProps, patientFormSchema } from './form-validation'
+import { UserFormProps, UserFormValidation } from './form-validation'
 import { FormFieldType } from '../structure/field-type'
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
 
-  const form = useForm<PatientFormProps>({
-    resolver: zodResolver(patientFormSchema),
+  const form = useForm<UserFormProps>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       name: '',
       email: '',
@@ -23,7 +23,7 @@ const PatientForm = () => {
     },
   })
 
-  async function onSubmit(userData: PatientFormProps) {
+  async function onSubmit(userData: UserFormProps) {
     setIsLoading(true)
     try {
       const user = await createUser(userData)
