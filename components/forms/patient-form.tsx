@@ -8,7 +8,7 @@ import { FormFieldType } from './constant/form-field-type'
 import { useState } from 'react'
 import { UserFormProps, userFormSchema } from './validations'
 import { useRouter } from 'next/navigation'
-import { createUser } from '@/actions/patient.action'
+import { createUser } from '@/actions/patient/create-user'
 
 const PatientForm = () => {
   const [isLoading, setIsLoading] = useState(false)

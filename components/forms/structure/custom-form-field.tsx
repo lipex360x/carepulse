@@ -5,11 +5,13 @@ import { FormFieldType } from '../constant'
 import { InputFormProps, InputPropsType } from '../interfaces'
 import { InputField } from './input-field'
 import { PhoneField } from './phone-field'
+import { DatePickerField } from './date-picker-field'
 
 const RenderField = (inputProps: InputFormProps) => {
   const field = inputProps.props.fieldType
   if (field === FormFieldType.INPUT) return <InputField {...inputProps} />
   if (field === FormFieldType.PHONE_INPUT) return <PhoneField {...inputProps} />
+  if (field === FormFieldType.DATE_PICKER) return <DatePickerField {...inputProps} />
 }
 
 export const CustomFormField = (props: InputPropsType) => {
