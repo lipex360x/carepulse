@@ -1,3 +1,5 @@
+'use server'
+
 import { users } from '@/lib/appwrite'
 import { stringfy } from '@/lib/utils'
 

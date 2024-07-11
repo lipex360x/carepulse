@@ -4,7 +4,13 @@ export const appwriteConfig = {
   url: process.env.APPWRITE_URL!,
   apiKey: process.env.APPWRITE_API_KEY!,
   projectId: process.env.APPWRITE_PROJECT_ID!,
-  databaseId: process.env.APPWRITE_DATABASE_ID!,
+
+  database: { id: process.env.APPWRITE_DATABASE_ID!, name: 'carepulse_db' },
+  patientCollection: { id: 'patient_collection', name: 'patient' },
+  doctorCollection: { id: 'doctor_collection', name: 'doctor' },
+  appointmentCollection: { id: 'appointment_collection', name: 'appointment' },
+
+  bucket: { id: process.env.APPWRITE_BUCKET_ID!, name: 'carepulse_bucket' },
 }
 
 const client = new NodeClient()

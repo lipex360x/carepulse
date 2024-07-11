@@ -6,7 +6,6 @@ import { Form, FormControl } from '@/components/ui/form'
 import { CustomFormField, SubmitButton } from '../structure'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { createUser } from '@/actions/patient/create-user'
 import { RadioGroup, RadioGroupItem } from '../../ui/radio-group'
 import { Doctors, GenderOptions, IdentificationTypes } from './constant'
 import { Label } from '../../ui/label'
@@ -16,6 +15,7 @@ import { FileUploader } from '../../ui/file-uploader'
 import { PatientFormProps, PatientFormValidation } from './form-validation'
 import { FormFieldType } from '../structure/field-type'
 import { PatientFormDefaultValues } from './form-default-values'
+import { registerPatient } from '@/actions/patient'
 
 export const RegisterForm = ({ user }: { user: User }) => {
   const [isLoading, setIsLoading] = useState(false)
@@ -31,11 +31,29 @@ export const RegisterForm = ({ user }: { user: User }) => {
     },
   })
 
-  async function onSubmit(userData: PatientFormProps) {
+  async function onSubmit(userFormData: PatientFormProps) {
     setIsLoading(true)
+
     try {
-      const user = await createUser(userData)
-      if (user) router.push(`/patients/${user.$id}/register`)
+      const formData = new FormData()
+      if (userFormData.identificationDocument && userFormData.identificationDocument.length > 0) {
+        const blobFile = new Blob([userFormData.identificationDocument[0]], {
+          type: userFormData.identificationDocument[0].type,
+        })
+        formData.append('blobFile', blobFile)
+        formData.append('fileName', userFormData.identificationDocument[0].name)
+      }
+      const patientData = {
+        ...userFormData,
+        userId: user.$id,
+        birthDate: new Date(userFormData.birthDate),
+        identificationDocument: formData,
+      }
+
+      //@ts-ignore
+      const patient = await registerPatient(patientData)
+
+      if (patient) router.push(`/patient/${user.$id}/new-appointment`)
     } catch (error) {
       console.log(error)
     }
