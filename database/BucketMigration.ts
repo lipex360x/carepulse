@@ -1,10 +1,8 @@
-import { appwriteConfig, storage } from '@/lib/appwrite'
+import { bucket, storage } from '@/lib/appwrite'
 import { Permission, Role } from 'node-appwrite'
 
 export class BucketMigration {
   static async execute() {
-    const { bucket } = appwriteConfig
-
     const permissions = [
       Permission.create(Role.any()),
       Permission.read(Role.any()),

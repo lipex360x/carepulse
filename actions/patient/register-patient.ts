@@ -1,13 +1,12 @@
 'use server'
 
-import { appwriteConfig, databases, storage } from '@/lib/appwrite'
+import { bucket, database, databases, patientCollection, projectId, storage } from '@/lib/appwrite'
 import { stringfy } from '@/lib/utils'
+import { url } from 'inspector'
 import { ID } from 'node-appwrite'
 import { InputFile } from 'node-appwrite/file'
 
 export const registerPatient = async ({ identificationDocument, ...patient }: RegisterUserParams) => {
-  const { database, bucket, url, patientCollection, projectId } = appwriteConfig
-
   try {
     let file
 
