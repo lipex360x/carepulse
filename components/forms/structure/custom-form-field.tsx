@@ -11,16 +11,21 @@ import { FieldPropsType, FormFieldType, InputPropsType } from './field-type'
 
 const RenderField = (fieldProps: FieldPropsType) => {
   const { fieldType } = fieldProps.props
-  if (fieldType === FormFieldType.INPUT) return <InputField {...fieldProps} />
-  if (fieldType === FormFieldType.TEXTAREA) return <TextAreaField {...fieldProps} />
-  if (fieldType === FormFieldType.PHONE_INPUT) return <PhoneField {...fieldProps} />
-  if (fieldType === FormFieldType.DATE_PICKER) return <DatePickerField {...fieldProps} />
-  if (fieldType === FormFieldType.CHECKBOX) return <CheckboxField {...fieldProps} />
-  if (fieldType === FormFieldType.SELECT) return <SelectField {...fieldProps} />
-  if (fieldType === FormFieldType.SKELETON) {
-    const { renderSkeleton } = fieldProps.props
-    return renderSkeleton ? renderSkeleton(fieldProps.field) : null
-  }
+
+  const fieldMap = new Map()
+  fieldMap.set(FormFieldType.INPUT, InputField)
+  fieldMap.set(FormFieldType.TEXTAREA, TextAreaField)
+  fieldMap.set(FormFieldType.PHONE_INPUT, PhoneField)
+  fieldMap.set(FormFieldType.DATE_PICKER, DatePickerField)
+  fieldMap.set(FormFieldType.CHECKBOX, CheckboxField)
+  fieldMap.set(FormFieldType.SELECT, SelectField)
+  fieldMap.set(FormFieldType.SKELETON, ({ props, field }: FieldPropsType) => {
+    const { renderSkeleton } = props
+    return renderSkeleton ? renderSkeleton(field) : null
+  })
+
+  const FieldComponent = fieldMap.get(fieldType)
+  return FieldComponent ? <FieldComponent {...fieldProps} /> : null
 }
 
 export const CustomFormField = (inputProps: InputPropsType) => {
