@@ -1,11 +1,12 @@
 import { listAppointments } from '@/actions/appointment'
 import { StatCard } from '@/components/stat-card'
+import { columns } from '@/components/table/columns'
+import { DataTable } from '@/components/table/data-table'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Admin = async () => {
   const appointments = await listAppointments()
-  console.log(appointments)
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -44,6 +45,8 @@ const Admin = async () => {
             icon="/assets/icons/cancelled.svg"
           />
         </section>
+
+        <DataTable columns={columns} data={appointments.documents} />
       </main>
     </div>
   )
