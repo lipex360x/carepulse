@@ -1,21 +1,25 @@
 import { getUser } from '@/actions/patient/get-user'
 import { RegisterForm } from '@/components/forms/register/register-form'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId)
+  console.log(user)
 
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container">
         <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
-          <Image
-            src="/assets/icons/logo-full.svg"
-            height={100}
-            width={100}
-            alt="patient"
-            className="mb-12 h-10 w-fit"
-          />
+          <Link href="/">
+            <Image
+              src="/assets/icons/logo-full.svg"
+              height={100}
+              width={100}
+              alt="patient"
+              className="mb-12 h-10 w-fit"
+            />
+          </Link>
 
           <RegisterForm user={user} />
 

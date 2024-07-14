@@ -8,18 +8,7 @@ import Image from 'next/image'
 import { AppointmentModal } from '../appointment-modal'
 import { Appointment } from '@/types/appwrite.types'
 
-export type Payment = {
-  patient: any
-  id: string
-  amount: number
-  status: 'pending' | 'scheduled' | 'cancelled' | 'failed' | 'processing'
-  email: string
-  schedule: string
-  primaryPhysician: string
-  userId: string
-}
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Appointment>[] = [
   {
     header: 'ID',
     cell: ({ row }) => <p className="text-14-medium">{row.index + 1}</p>,

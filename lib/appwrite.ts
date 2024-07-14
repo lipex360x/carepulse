@@ -7,10 +7,10 @@ export const appwriteConfig = {
 
 export const projectId = process.env.APPWRITE_PROJECT_ID!
 
-export const database = { id: process.env.APPWRITE_DATABASE_ID!, name: 'carepulse_db' }
-export const patientCollection = { id: 'patient_collection', name: 'patient' }
-export const doctorCollection = { id: 'doctor_collection', name: 'doctor' }
-export const appointmentCollection = { id: 'appointment_collection', name: 'appointment' }
+export const database = { id: process.env.APPWRITE_DATABASE_ID!, name: 'carepulse_data' }
+export const patientCollection = { id: process.env.APPWRITE_PATIENT_COLLECTION_ID!, name: 'patient' }
+export const doctorCollection = { id: process.env.APPWRITE_DOCTOR_COLLECTION_ID!, name: 'doctor' }
+export const appointmentCollection = { id: process.env.APPWRITE_APPOINTMENT_COLLECTION_ID!, name: 'appointment' }
 
 export const bucket = { id: process.env.APPWRITE_BUCKET_ID!, name: 'carepulse_bucket' }
 

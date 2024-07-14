@@ -3,11 +3,12 @@
 import { appointmentCollection, database, databases } from '@/lib/appwrite'
 import { stringfy } from '@/lib/utils'
 import { Appointment } from '@/types/appwrite.types'
+import { revalidatePath } from 'next/cache'
 import { Query } from 'node-appwrite'
 
 export const listAppointments = async () => {
   const { documents, total } = await databases.listDocuments(database.id, appointmentCollection.id, [
-    Query.orderDesc('$createdAt'),
+    Query.orderAsc('$createdAt'),
   ])
 
   const initialCounts = {
@@ -29,5 +30,6 @@ export const listAppointments = async () => {
     ...counts,
   }
 
+  revalidatePath('/admin')
   return stringfy(data)
 }

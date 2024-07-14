@@ -44,11 +44,11 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
   const form = useForm<AppointmentValidationProps>({
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
-      primaryPhysician: '',
-      schedule: new Date(),
-      reason: '',
-      note: '',
-      cancellationReason: '',
+      primaryPhysician: appointment ? appointment.primaryPhysician : '',
+      schedule: appointment ? new Date(appointment.schedule) : new Date(),
+      reason: appointment ? appointment.reason : '',
+      note: appointment ? appointment.note : '',
+      cancellationReason: appointment ? appointment.cancellationReason : '',
     },
   })
 
@@ -84,7 +84,7 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
             primaryPhysician: formData?.primaryPhysician,
             schedule: new Date(formData?.schedule),
             status: appointmentStatus.get(type),
-            cancelationReason: formData?.cancelationReason,
+            cancellationReason: formData?.cancellationReason,
           },
           type,
         } as UpdateAppointmentParams

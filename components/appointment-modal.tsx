@@ -38,9 +38,10 @@ export const AppointmentModal = ({ type, appointment, patientId, userId }: Appoi
       </DialogTrigger>
       <DialogContent className="shad-dialog sm:max-w-md">
         <DialogHeader className="mb-4 space-y-3">
-          <DialogTitle className="capitalize">{type} Appointment?</DialogTitle>
+          <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
           <DialogDescription>Please fill in the following details to {type} an appointment</DialogDescription>
         </DialogHeader>
+
         <AppointmentForm
           userId={userId}
           patientId={patientId}
