@@ -45,12 +45,14 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
     resolver: zodResolver(AppointmentFormValidation),
     defaultValues: {
       primaryPhysician: appointment ? appointment.primaryPhysician : '',
-      schedule: appointment ? new Date(appointment.schedule) : new Date(),
+      schedule: appointment ? new Date(appointment.schedule) : new Date(Date.now()),
       reason: appointment ? appointment.reason : '',
       note: appointment ? appointment.note : '',
-      cancellationReason: appointment ? appointment.cancellationReason : '',
+      cancellationReason: appointment?.cancellationReason || '',
     },
   })
+
+  if (form.formState.errors) console.log('FORM ERROR:', form.formState.errors)
 
   async function onSubmit(formData: AppointmentValidationProps) {
     setIsLoading(true)
@@ -69,13 +71,10 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
 
         const appointment = await createAppointment(appointmentData)
 
-        if (appointment) {
-          form.reset()
-          router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
-        }
-      }
-
-      if (type === 'cancel' && patientId) {
+        if (!appointment) throw new Error()
+        form.reset()
+        router.push(`/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`)
+      } else {
         const appointmentData = {
           userId,
           appointmentId: appointment?.$id,
@@ -90,14 +89,14 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
         } as UpdateAppointmentParams
 
         const updatedAppointment = await updateAppointment(appointmentData)
-        if (updatedAppointment) {
-          setOpen && setOpen(false)
-          form.reset()
-        }
+        if (!updatedAppointment) throw new Error()
+        setOpen && setOpen(false)
+        form.reset()
       }
     } catch (error) {
       console.log(error)
     }
+
     setIsLoading(false)
   }
 
@@ -178,7 +177,7 @@ export const AppointmentForm = ({ userId, patientId, type, appointment, setOpen 
         <SubmitButton
           isLoading={isLoading}
           className={cn('w-full', {
-            'shad-primary-btn': type === 'create',
+            'shad-primary-btn': type === 'schedule' || type === 'create',
             'shad-danger-btn': type === 'cancel',
           })}
         >

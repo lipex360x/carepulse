@@ -8,8 +8,6 @@ export const CreateAppointmentValidation = z.object({
   cancellationReason: z.string().optional(),
 })
 
-export type CreateAppointmentProps = z.infer<typeof CreateAppointmentValidation>
-
 export const ScheduleAppointmentValidation = z.object({
   primaryPhysician: z.string().min(2, 'Select at least one doctor'),
   schedule: z.coerce.date(),
