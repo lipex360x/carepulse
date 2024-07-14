@@ -5,7 +5,6 @@ import Link from 'next/link'
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId)
-  console.log(user)
 
   return (
     <div className="flex h-screen max-h-screen">

@@ -13,8 +13,6 @@ export const updateAppointment = async ({ appointmentId, appointment: appointmen
       appointmentData,
     )
 
-    console.log(appointmentData)
-
     if (!updatedAppointment) throw Error
     revalidatePath('/admin')
     return stringfy(updatedAppointment)

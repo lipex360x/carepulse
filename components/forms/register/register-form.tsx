@@ -31,7 +31,9 @@ export const RegisterForm = ({ user }: { user: User }) => {
     },
   })
 
-  console.log(form.formState.errors)
+  if (form.formState.errors) {
+    console.log(form.formState.errors)
+  }
 
   async function onSubmit(userFormData: PatientFormProps) {
     setIsLoading(true)
@@ -51,8 +53,6 @@ export const RegisterForm = ({ user }: { user: User }) => {
         birthDate: new Date(userFormData.birthDate),
         identificationDocument: formData,
       }
-
-      console.log(patientData)
 
       //@ts-ignore
       const patient = await registerPatient(patientData)
